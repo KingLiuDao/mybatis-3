@@ -141,7 +141,9 @@ public class XPathParser {
   }
 
   public String evalString(Object root, String expression) {
+    //获得值
     String result = (String) evaluate(expression, root, XPathConstants.STRING);
+    //替换动态值
     result = PropertyParser.parse(result, variables);
     return result;
   }
@@ -230,6 +232,8 @@ public class XPathParser {
   private Document createDocument(InputSource inputSource) {
     // important: this must only be called AFTER common constructor
     try {
+
+      //创建 DocumentBuilderFactory
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
       factory.setValidating(validation);
@@ -240,6 +244,7 @@ public class XPathParser {
       factory.setCoalescing(false);
       factory.setExpandEntityReferences(true);
 
+      //创建DocumentBuilder
       DocumentBuilder builder = factory.newDocumentBuilder();
       builder.setEntityResolver(entityResolver);
       builder.setErrorHandler(new ErrorHandler() {

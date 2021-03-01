@@ -51,7 +51,9 @@ public class PropertyParser {
   }
 
   public static String parse(String string, Properties variables) {
+    //自定义handler (property中变量值替换)
     VariableTokenHandler handler = new VariableTokenHandler(variables);
+    //调用 通用解析器解析
     GenericTokenParser parser = new GenericTokenParser("${", "}", handler);
     return parser.parse(string);
   }
@@ -75,6 +77,7 @@ public class PropertyParser {
     public String handleToken(String content) {
       if (variables != null) {
         String key = content;
+        //开启默认值功能
         if (enableDefaultValue) {
           final int separatorIndex = content.indexOf(defaultValueSeparator);
           String defaultValue = null;
@@ -86,6 +89,7 @@ public class PropertyParser {
             return variables.getProperty(key, defaultValue);
           }
         }
+        //未开启默认值功能
         if (variables.containsKey(key)) {
           return variables.getProperty(key);
         }
