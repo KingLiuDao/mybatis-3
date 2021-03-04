@@ -25,6 +25,10 @@ public class DefaultReflectorFactory implements ReflectorFactory {
   public DefaultReflectorFactory() {
   }
 
+  /**
+   * 是否缓存
+   * @return
+   */
   @Override
   public boolean isClassCacheEnabled() {
     return classCacheEnabled;
@@ -37,8 +41,10 @@ public class DefaultReflectorFactory implements ReflectorFactory {
 
   @Override
   public Reflector findForClass(Class<?> type) {
+
     if (classCacheEnabled) {
       // synchronized (type) removed see issue #461
+      //存在则从map中取  不存在则创建
       return reflectorMap.computeIfAbsent(type, Reflector::new);
     } else {
       return new Reflector(type);
