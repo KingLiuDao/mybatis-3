@@ -21,11 +21,16 @@ import org.apache.ibatis.logging.LogFactory;
 
 /**
  * @author Clinton Begin
+ * 支持打印日志的 Cache 实现类
  */
 public class LoggingCache implements Cache {
 
   private final Log log;
   private final Cache delegate;
+
+  /**
+   * 计算缓存命中率
+   */
   protected int requests = 0;
   protected int hits = 0;
 

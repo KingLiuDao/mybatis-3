@@ -32,7 +32,7 @@ import org.apache.ibatis.cache.CacheException;
  * <p>By its nature, this implementation can cause deadlock when used incorrecly.
  *
  * @author Eduardo Macarron
- *
+ *阻塞的 Cache 实现类
  */
 public class BlockingCache implements Cache {
 

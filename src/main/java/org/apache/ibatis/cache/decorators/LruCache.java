@@ -24,11 +24,18 @@ import org.apache.ibatis.cache.Cache;
  * Lru (least recently used) cache decorator.
  *
  * @author Clinton Begin
+ * 基于最少使用的淘汰机制的 Cache 实现
  */
 public class LruCache implements Cache {
 
   private final Cache delegate;
+  /**
+   * 基于 LinkedHashMap 实现淘汰机制
+   */
   private Map<Object, Object> keyMap;
+  /**
+   * 最老的键，即要被淘汰的
+   */
   private Object eldestKey;
 
   public LruCache(Cache delegate) {

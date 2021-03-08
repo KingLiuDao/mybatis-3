@@ -21,6 +21,7 @@ import org.apache.ibatis.cache.Cache;
 
 /**
  * @author Clinton Begin
+ * 定时清空整个容器的 Cache 实现
  */
 public class ScheduledCache implements Cache {
 
